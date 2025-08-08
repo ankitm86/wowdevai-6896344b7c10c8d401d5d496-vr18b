@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rakhi Wish Maker - Create Beautiful Greeting Cards</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://use.typekit.net/yjp3aho.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Pacifico&family=Kalam:wght@300;400;700&family=Caveat:wght@400;600;700&family=Great+Vibes&family=Satisfy&family=Comfortaa:wght@300;400;700&family=Indie+Flower&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'sofia-pro', sans-serif;
+    }
+    
+    /* Enhanced Animations */
+    @keyframes floatEnhanced {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(2deg); }
+    }
+    
+    @keyframes bounceEnhanced {
+      0%, 20%, 53%, 80%, 100% { transform: translateY(0px) scale(1); }
+      40%, 43% { transform: translateY(-20px) scale(1.1); }
+      70% { transform: translateY(-10px) scale(1.05); }
+      90% { transform: translateY(-4px) scale(1.02); }
+    }
+    
+    @keyframes pulseGlow {
+      0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+      }
+      50% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(255, 107, 107, 0.8), 0 0 40px rgba(255, 107, 107, 0.6);
+      }
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: -200px 0; }
+      100% { background-position: calc(200px + 100%) 0; }
+    }
+    
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0.3) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1) rotate(180deg); }
+    }
+    
+    @keyframes slideInBounce {
+      0% { transform: translateX(-100%) scale(0.3); opacity: 0; }
+      50% { transform: translateX(10%) scale(1.1); opacity: 0.8; }
+      100% { transform: translateX(0%) scale(1); opacity: 1; }
+    }
+    
+    @keyframes rainbow {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+    
+    .float-enhanced { animation: floatEnhanced 4s ease-in-out infinite; }
+    .bounce-enhanced { animation: bounceEnhanced 2s ease-in-out infinite; }
+    .pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
+    .shimmer-effect {
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      background-size: 200px 100%;
+      animation: shimmer 2s infinite;
+    }
+    .sparkle { animation: sparkle 1.5s ease-in-out infinite; }
+    .slide-bounce { animation: slideInBounce 0.8s ease-out; }
+    .rainbow-rotate { animation: rainbow 3s linear infinite; }
+    
+    /* Font Classes */
+    .font-dancing { font-family: 'Dancing Script', cursive; }
+    .font-pacifico { font-family: 'Pacifico', cursive; }
+    .font-kalam { font-family: 'Kalam', cursive; }
+    .font-caveat { font-family: 'Caveat', cursive; }
+    .font-great-vibes { font-family: 'Great Vibes', cursive; }
+    .font-satisfy { font-family: 'Satisfy', cursive; }
+    .font-comfortaa { font-family: 'Comfortaa', cursive; }
+    .font-indie { font-family: 'Indie Flower', cursive; }
+    
+    /* Background Themes */
+    .bg-default { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%); }
+    .bg-warm { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 50%, #ff9ff3 100%); }
+    .bg-sunset { background: linear-gradient(135deg, #fdbb2d 0%, #e55d87 50%, #5f27cd 100%); }
+    .bg-royal { background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); }
+    .bg-nature { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #43e97b 100%); }
+    .bg-cool { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 50%, #d299c2 100%); }
+    .bg-festival { background: linear-gradient(135deg, #ff9a56 0%, #ff6b95 25%, #c44569 50%, #f8b500 75%, #ff6348 100%); }
+    .bg-golden { background: linear-gradient(135deg, #f7971e 0%, #ffd200 50%, #ff6b6b 100%); }
+    .bg-mystic { background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 25%, #ff6b95 50%, #ffa726 75%, #42e695 100%); }
+    .bg-traditional { background: linear-gradient(135deg, #d4418e 0%, #0652c5 25%, #d4418e 50%, #0652c5 75%, #d4418e 100%); }
+    
+    /* Card Animation Classes */
+    .card-enter {
+      animation: cardSlideIn 0.6s ease-out;
+    }
+    
+    @keyframes cardSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    
+    /* Photo Upload Styles */
+    .photo-upload-area {
+      border: 3px dashed #ff6b6b;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .photo-upload-area:hover {
+      border-color: #ff5252;
+      background: rgba(255, 107, 107, 0.05);
+    }
+    
+    .photo-upload-area.drag-over {
+      border-color: #4caf50;
+      background: rgba(76, 175, 80, 0.1);
+      transform: scale(1.02);
+    }
+    
+    /* Social Share Animations */
+    .share-button {
+      transition: all 0.3s ease;
+    }
+    
+    .share-button:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    
+    /* Enhanced Sticker Effects */
+    .sticker-enhanced {
+      transition: all 0.2s ease;
+      filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+    }
+    
+    .sticker-enhanced:hover {
+      transform: scale(1.2) rotate(10deg);
+      filter: drop-shadow(3px 3px 8px rgba(0,0,0,0.3));
+    }
+    
+    /* Notification Styles */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      transform: translateX(400px);
+      transition: transform 0.3s ease;
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-orange-400 via-red-400 to-pink-400">
+  
+  <!-- Notification Container -->
+  <div id="notification-container"></div>
+  
+  <!-- Floating Decorative Elements -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute top-10 left-10 text-6xl sparkle" style="animation-delay: 0s;">✨</div>
+    <div class="absolute top-20 right-20 text-4xl float-enhanced" style="animation-delay: 1s;">🎀</div>
+    <div class="absolute bottom-20 left-20 text-5xl bounce-enhanced" style="animation-delay: 2s;">🌺</div>
+    <div class="absolute bottom-10 right-10 text-3xl sparkle" style="animation-delay: 3s;">⭐</div>
+    <div class="absolute top-1/2 left-5 text-4xl float-enhanced" style="animation-delay: 1.5s;">🌸</div>
+    <div class="absolute top-1/3 right-5 text-5xl bounce-enhanced" style="animation-delay: 2.5s;">🪔</div>
+  </div>
+
+  <div class="relative z-10 container mx-auto px-4 py-8">
+    <!-- Header -->
+    <header class="text-center mb-12">
+      <h1 data-id="main-title" class="text-6xl md:text-8xl font-bold text-white mb-4 float-enhanced">
+        🎀 Rakhi Wish Maker ✨
+      </h1>
+      <p data-id="subtitle" class="text-xl md:text-2xl text-white/90 bounce-enhanced">
+        Create beautiful personalized greeting cards for your beloved siblings!
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+      
+      <!-- Control Panel -->
+      <div class="space-y-6">
+        
+        <!-- Text Input Section -->
+        <div data-id="text-section" class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl slide-bounce">
+          <h2 data-id="text-section-title" class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+            <i data-lucide="type" class="mr-2 text-pink-500"></i>
+            Your Message
+          </h2>
+          <textarea 
+            data-id="wish-textarea"
+            id="wishText" 
+            placeholder="Write your heartfelt Rakhi wishes here..."
+            class="w-full h-32 p-4 border-2 border-pink-300 rounded-xl focus:border-pink-500 focus:ring-4 focus:ring-pink-200 resize-none transition-all duration-300 text-gray-800"
+          >Happy Raksha Bandhan! 
+You are not just my sibling, but my best friend and protector. 
+Wishing you all the happiness in the world! 💕</textarea>
+        </div>
+
+        <!-- Font Selection -->
+        <div data-id="font-section" class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl slide-bounce" style="animation-delay: 0.2s;">
+          <h2 data-id="font-section-title" class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+            <i data-lucide="text-cursor-input" class="mr-2 text-pink-500"></i>
+            Choose Font Style
+          </h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <button data-id="font-dancing" class="font-option p-3 border-2 border-pink-200 rounded-xl hover:border-pink-500 hover:bg-pink-50 transition-all duration-300 font-dancing text-lg hover:scale-105 hover:shadow-lg" data-font="dancing">
+              Dancing Script
+            </button>
+            <button data-id="font-pacifico" class="font-option p-3 border-2 border-pink-200 rounded-xl hover:border-pink-500 hover:bg-pink-50 transition-all duration-300 font-pacifico text-lg hover:scale-105 hover:shadow-lg" data-font="pacifico">
+              Pacifico
+            </button>
+            <button data-id="font-kalam" class="font-option p-3 border-2 border-pink-200 rounded-xl hover:border-pink-500 hover:bg-pink-50 transition-all duration-300 font-kalam text-lg hover:scale-105 hover:shadow-lg" data-font="kalam">
+              Kalam
+            </button>
+            <button data-id="font-caveat" class="font-option p-3 border-2 border-pink-200 rounded-xl hover:border-pink-500 hover:bg-pink-50 transition-all duration-300 font-caveat text-lg hover:scale-105 hover:shadow-lg" data-font="caveat">
+              Caveat
+            </button>
+            <button data-id="font-great-vibes" class="font-option p-3 border-2 border-pink-200 rounded-xl hover:border-pink-500 hover:bg-pink-50 transition-all duration-300 font-great-vibes text-lg hover:scale-105 hover:shadow-lg" data-font="great-vibes">
+              Great Vibes
+            </button>
+            <button data-id="font-satisfy" class="font-option p-3 border-2 border-pink-200 rounded-xl hover:border-pink-500 hover:bg-pink-50 transition-all duration-300 font-satisfy text-lg hover:scale-105 hover:shadow-lg" data-font="satisfy">
+              Satisfy
+            </button>
+            <button data-id="font-comfortaa" class="font-option p-3 border-2 border-pink-200 rounded-xl hover:border-pink-500 hover:bg-pink-50 transition-all duration-300 font-comfortaa text-lg hover:scale-105 hover:shadow-lg" data-font="comfortaa">
+              Comfortaa
+            </button>
+            <button data-id="font-indie" class="font-option p-3 border-2 border-pink-200 rounded-xl hover:border-pink-500 hover:bg-pink-50 transition-all duration-300 font-indie text-lg hover:scale-105 hover:shadow-lg" data-font="indie">
+              Indie Flower
+            </button>
+          </div>
+        </div>
+
+        <!-- Photo Upload Section -->
+        <div data-id="photo-section" class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl slide-bounce" style="animation-delay: 0.4s;">
+          <h2 data-id="photo-section-title" class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+            <i data-lucide="image-plus" class="mr-2 text-pink-500"></i>
+            Add Your Rakhi Photo
+          </h2>
+          
+          <div data-id="photo-upload-area" class="photo-upload-area p-8 text-center mb-4">
+            <input type="file" id="photoUpload" accept="image/*" class="hidden">
+            <div id="uploadPrompt" class="space-y-3">
+              <i data-lucide="upload-cloud" class="mx-auto text-6xl text-pink-400 bounce-enhanced"></i>
+              <p class="text-lg text-gray-600">Drop your Rakhi photo here or click to browse</p>
+              <p class="text-sm text-gray-500">Supports JPG, PNG, GIF (max 5MB)</p>
+            </div>
+            <div id="photoPreview" class="hidden">
+              <img id="previewImage" class="mx-auto max-h-40 rounded-lg shadow-lg" alt="Rakhi photo preview">
+              <p class="mt-2 text-sm text-gray-600">Your beautiful Rakhi photo is ready!</p>
+            </div>
+          </div>
+          
+          <div class="flex gap-3">
+            <button data-id="select-photo-btn" id="selectPhotoBtn" class="flex-1 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-xl hover:from-pink-600 hover:to-purple-700 transition-all duration-300 flex items-center justify-center hover:scale-105 hover:shadow-lg">
+              <i data-lucide="image" class="mr-2"></i>
+              Select Photo
+            </button>
+            <button data-id="remove-photo-btn" id="removePhotoBtn" class="bg-red-500 text-white px-6 py-3 rounded-xl hover:bg-red-600 transition-all duration-300 flex items-center justify-center hover:scale-105 hover:shadow-lg">
+              <i data-lucide="x" class=""></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Enhanced Background Themes -->
+        <div data-id="background-section" class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl slide-bounce" style="animation-delay: 0.6s;">
+          <h2 data-id="background-section-title" class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+            <i data-lucide="palette" class="mr-2 text-pink-500"></i>
+            Background Themes
+          </h2>
+          <div class="grid grid-cols-5 gap-3">
+            <button data-id="bg-default" class="bg-option h-16 rounded-xl bg-default hover:scale-110 hover:shadow-xl transition-all duration-300 border-4 border-transparent hover:border-white" data-bg="default"></button>
+            <button data-id="bg-warm" class="bg-option h-16 rounded-xl bg-warm hover:scale-110 hover:shadow-xl transition-all duration-300 border-4 border-transparent hover:border-white" data-bg="warm"></button>
+            <button data-id="bg-sunset" class="bg-option h-16 rounded-xl bg-sunset hover:scale-110 hover:shadow-xl transition-all duration-300 border-4 border-transparent hover:border-white" data-bg="sunset"></button>
+            <button data-id="bg-royal" class="bg-option h-16 rounded-xl bg-royal hover:scale-110 hover:shadow-xl transition-all duration-300 border-4 border-transparent hover:border-white" data-bg="royal"></button>
+            <button data-id="bg-nature" class="bg-option h-16 rounded-xl bg-nature hover:scale-110 hover:shadow-xl transition-all duration-300 border-4 border-transparent hover:border-white" data-bg="nature"></button>
+            <button data-id="bg-cool" class="bg-option h-16 rounded-xl bg-cool hover:scale-110 hover:shadow-xl transition-all duration-300 border-4 border-transparent hover:border-white" data-bg="cool"></button>
+            <button data-id="bg-festival" class="bg-option h-16 rounded-xl bg-festival hover:scale-110 hover:shadow-xl transition-all duration-300 border-4 border-transparent hover:border-white" data-bg="festival"></button>
+            <button data-id="bg-golden" class="bg-option h-16 rounded-xl bg-golden hover:scale-110 hover:shadow-xl transition-all duration-300 border-4 border-transparent hover:border-white" data-bg="golden"></button>
+            <button data-id="bg-mystic" class="bg-option h-16 rounded-xl bg-mystic hover:scale-110 hover:shadow-xl transition-all duration-300 border-4 border-transparent hover:border-white" data-bg="mystic"></button>
+            <button data-id="bg-traditional" class="bg-option h-16 rounded-xl bg-traditional hover:scale-110 hover:shadow-xl transition-all duration-300 border-4 border-transparent hover:border-white" data-bg="traditional"></button>
+          </div>
+        </div>
+
+        <!-- Enhanced Stickers -->
+        <div data-id="stickers-section" class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl slide-bounce" style="animation-delay: 0.8s;">
+          <h2 data-id="stickers-section-title" class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+            <i data-lucide="sticker" class="mr-2 text-pink-500"></i>
+            Rakhi Stickers & Decorations
+          </h2>
+          <div class="grid grid-cols-6 md:grid-cols-8 gap-3 mb-4">
+            <button data-id="sticker-bow" class="sticker-btn text-4xl hover:scale-125 transition-all duration-200 sticker-enhanced" data-sticker="🎀">🎀</button>
+            <button data-id="sticker-flower" class="sticker-btn text-4xl hover:scale-125 transition-all duration-200 sticker-enhanced" data-sticker="🌺">🌺</button>
+            <button data-id="sticker-star" class="sticker-btn text-4xl hover:scale-125 transition-all duration-200 sticker-enhanced" data-sticker="⭐">⭐</button>
+            <button data-id="sticker-heart" class="sticker-btn text-4xl hover:scale-125 transition-all duration-200 sticker-enhanced" data-sticker="💖">💖</button>
+            <button data-id="sticker-sparkles" class="sticker-btn text-4xl hover:scale-125 transition-all duration-200 sticker-enhanced" data-sticker="🌟">🌟</button>
+            <button data-id="sticker-confetti" class="sticker-btn text-4xl hover:scale-125 transition-all duration-200 sticker-enhanced" data-sticker="🎊">🎊</button>
+            <button data-id="sticker-blossom" class="sticker-btn text-4xl hover:scale-125 transition-all duration-200 sticker-enhanced" data-sticker="🌸">🌸</button>
+            <button data-id="sticker-gift" class="sticker-btn text-4xl hover:scale-125 transition-all duration-200 sticker-enhanced" data-sticker="🎁">🎁</button>
+            <button data-id="sticker-diya" class="sticker-btn text-4xl hover:scale-125 transition-all duration-200 sticker-enhanced" data-sticker="🪔">🪔</button>
+            <button data-id="sticker-om" class="sticker-btn text-4xl hover:scale-125 transition-all duration-200 sticker-enhanced" data-sticker="🕉️">🕉️</button>
+            <button data-id="sticker-daisy" class="sticker-btn text-4xl hover:scale-125 transition-all duration-200 sticker-enhanced" data-sticker="🌼">🌼</button>
+            <button data-id="sticker-glitter" class="sticker-btn text-4xl hover:scale-125 transition-all duration-200 sticker-enhanced" data-sticker="✨">✨</button>
+            <button data-id="sticker-lotus" class="sticker-btn text-4xl hover:scale-125 transition-all duration-200 sticker-enhanced" data-sticker="🪷">🪷</button>
+            <button data-id="sticker-celebration" class="sticker-btn text-4xl hover:scale-125 transition-all duration-200 sticker-enhanced" data-sticker="🎉">🎉</button>
+            <button data-id="sticker-sun" class="sticker-btn text-4xl hover:scale-125 transition-all duration-200 sticker-enhanced" data-sticker="☀️">☀️</button>
+            <button data-id="sticker-moon" class="sticker-btn text-4xl hover:scale-125 transition-all duration-200 sticker-enhanced" data-sticker="🌙">🌙</button>
+          </div>
+          <button data-id="clear-stickers-btn" id="clearStickersBtn" class="w-full bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+            <i data-lucide="eraser" class="mr-2 inline-block"></i>
+            Clear All Stickers
+          </button>
+        </div>
+
+        <!-- Actions -->
+        <div data-id="actions-section" class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl slide-bounce" style="animation-delay: 1s;">
+          <h2 data-id="actions-title" class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+            <i data-lucide="download" class="mr-2 text-pink-500"></i>
+            Save & Share
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <button data-id="download-btn" id="downloadBtn" class="bg-gradient-to-r from-green-500 to-blue-600 text-white px-6 py-4 rounded-xl hover:from-green-600 hover:to-blue-700 transition-all duration-300 flex items-center justify-center hover:scale-105 hover:shadow-xl pulse-glow">
+              <i data-lucide="download" class="mr-2"></i>
+              Download Card
+            </button>
+            <button data-id="share-btn" id="shareBtn" class="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-6 py-4 rounded-xl hover:from-purple-600 hover:to-pink-700 transition-all duration-300 flex items-center justify-center hover:scale-105 hover:shadow-xl share-button">
+              <i data-lucide="share-2" class="mr-2"></i>
+              Share Card
+            </button>
+          </div>
+          <div class="mt-4 grid grid-cols-3 gap-2">
+            <button data-id="share-whatsapp" class="social-share bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-all duration-300 share-button" data-platform="whatsapp">
+              WhatsApp
+            </button>
+            <button data-id="share-facebook" class="social-share bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-all duration-300 share-button" data-platform="facebook">
+              Facebook
+            </button>
+            <button data-id="share-twitter" class="social-share bg-blue-400 text-white py-2 px-4 rounded-lg hover:bg-blue-500 transition-all duration-300 share-button" data-platform="twitter">
+              Twitter
+            </button>
+          </div>
+          <button data-id="reset-btn" id="resetBtn" class="w-full mt-4 bg-gray-500 text-white px-4 py-3 rounded-xl hover:bg-gray-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+            <i data-lucide="rotate-ccw" class="mr-2 inline-block"></i>
+            Reset All
+          </button>
+        </div>
+      </div>
+
+      <!-- Enhanced Preview Card -->
+      <div data-id="preview-section" class="lg:sticky lg:top-8">
+        <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl card-enter">
+          <h2 data-id="preview-title" class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+            <i data-lucide="eye" class="mr-2 text-pink-500"></i>
+            Live Preview
+          </h2>
+          
+          <div data-id="preview-container" class="relative">
+            <div id="greetingCard" class="relative w-full aspect-[3/4] bg-default rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-3xl">
+              
+              <!-- Background Photo -->
+              <div id="cardPhotoContainer" class="absolute inset-0 hidden">
+                <img id="cardPhoto" class="w-full h-full object-cover opacity-80" alt="User's Rakhi photo">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+              </div>
+              
+              <!-- Card Content -->
+              <div class="relative z-10 h-full flex flex-col justify-center items-center p-8 text-center">
+                
+                <!-- Decorative Header -->
+                <div class="mb-6 flex justify-center space-x-2 text-4xl bounce-enhanced">
+                  <span>🎀</span>
+                  <span class="sparkle">✨</span>
+                  <span>🌺</span>
+                </div>
+                
+                <!-- Main Text -->
+                <div id="previewText" class="font-dancing text-2xl md:text-3xl text-white leading-relaxed mb-6 drop-shadow-lg">
+                  Happy Raksha Bandhan! 
+                  <br>You are not just my sibling, but my best friend and protector. 
+                  <br>Wishing you all the happiness in the world! 💕
+                </div>
+                
+                <!-- Decorative Footer -->
+                <div class="mt-6 flex justify-center space-x-2 text-3xl float-enhanced">
+                  <span>🪔</span>
+                  <span class="sparkle">🌟</span>
+                  <span>🕉️</span>
+                </div>
+              </div>
+              
+              <!-- Dynamic Stickers Container -->
+              <div id="stickersContainer" class="absolute inset-0 pointer-events-none">
+                <!-- Stickers will be added here dynamically -->
+              </div>
+              
+              <!-- Animated Border -->
+              <div class="absolute inset-0 rounded-2xl border-4 border-white/30 shimmer-effect"></div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Global state
+    let currentFont = 'dancing';
+    let currentBg = 'default';
+    let stickers = [];
+    let uploadedPhoto = null;
+
+    // DOM elements
+    const wishTextArea = document.getElementById('wishText');
+    const previewText = document.getElementById('previewText');
+    const greetingCard = document.getElementById('greetingCard');
+    const stickersContainer = document.getElementById('stickersContainer');
+    const photoUpload = document.getElementById('photoUpload');
+    const cardPhotoContainer = document.getElementById('cardPhotoContainer');
+    const cardPhoto = document.getElementById('cardPhoto');
+    const photoPreview = document.getElementById('photoPreview');
+    const previewImage = document.getElementById('previewImage');
+    const uploadPrompt = document.getElementById('uploadPrompt');
+    
+    // Notification system
+    function showNotification(message, type = 'success') {
+      const notification = document.createElement('div');
+      notification.className = `notification bg-${type === 'success' ? 'green' : 'red'}-500 text-white px-6 py-4 rounded-lg shadow-lg`;
+      notification.innerHTML = `
+        <div class="flex items-center">
+          <i data-lucide="${type === 'success' ? 'check-circle' : 'x-circle'}" class="mr-2"></i>
+          <span>${message}</span>
+        </div>
+      `;
+      
+      document.getElementById('notification-container').appendChild(notification);
+      lucide.createIcons();
+      
+      // Show notification
+      setTimeout(() => notification.classList.add('show'), 100);
+      
+      // Hide notification
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+      }, 3000);
+    }
+
+    // Text update function
+    function updatePreviewText() {
+      const text = wishTextArea.value || "Happy Raksha Bandhan! \nYou are not just my sibling, but my best friend and protector. \nWishing you all the happiness in the world! 💕";
+      previewText.innerHTML = text.replace(/\n/g, '<br>');
+      previewText.className = `font-${currentFont} text-2xl md:text-3xl text-white leading-relaxed mb-6 drop-shadow-lg transition-all duration-300`;
+    }
+
+    // Font selection
+    document.querySelectorAll('.font-option').forEach(button => {
+      button.addEventListener('click', (e) => {
+        // Remove active state from all buttons
+        document.querySelectorAll('.font-option').forEach(btn => {
+          btn.classList.remove('border-pink-500', 'bg-pink-50', 'scale-105');
+          btn.classList.add('border-pink-200');
+        });
+        
+        // Add active state to clicked button
+        button.classList.add('border-pink-500', 'bg-pink-50', 'scale-105');
+        button.classList.remove('border-pink-200');
+        
+        currentFont = button.dataset.font;
+        updatePreviewText();
+        
+        // Add animation effect
+        previewText.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+          previewText.style.transform = 'scale(1)';
+        }, 200);
+        
+        showNotification(`Font changed to ${button.textContent}!`);
+      });
+    });
+
+    // Background selection
+    document.querySelectorAll('.bg-option').forEach(button => {
+      button.addEventListener('click', (e) => {
+        // Remove active state from all buttons
+        document.querySelectorAll('.bg-option').forEach(btn => {
+          btn.classList.remove('border-white', 'scale-110');
+          btn.classList.add('border-transparent');
+        });
+        
+        // Add active state to clicked button
+        button.classList.add('border-white', 'scale-110');
+        button.classList.remove('border-transparent');
+        
+        currentBg = button.dataset.bg;
+        greetingCard.className = greetingCard.className.replace(/bg-\w+/, `bg-${currentBg}`);
+        
+        // Add transition effect
+        greetingCard.style.transform = 'scale(1.02)';
+        setTimeout(() => {
+          greetingCard.style.transform = 'scale(1)';
+        }, 300);
+        
+        showNotification('Background theme updated!');
+      });
+    });
+
+    // Photo upload functionality
+    const photoUploadArea = document.querySelector('.photo-upload-area');
+    const selectPhotoBtn = document.getElementById('selectPhotoBtn');
+    const removePhotoBtn = document.getElementById('removePhotoBtn');
+
+    // File input change
+    photoUpload.addEventListener('change', handleFileSelect);
+    selectPhotoBtn.addEventListener('click', () => photoUpload.click());
+    removePhotoBtn.addEventListener('click', removePhoto);
+
+    // Drag and drop functionality
+    photoUploadArea.addEventListener('click', () => photoUpload.click());
+    photoUploadArea.addEventListener('dragover', handleDragOver);
+    photoUploadArea.addEventListener('dragleave', handleDragLeave);
+    photoUploadArea.addEventListener('drop', handleDrop);
+
+    function handleFileSelect(e) {
+      const file = e.target.files[0];
+      if (file) {
+        handleFile(file);
+      }
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+      photoUploadArea.classList.add('drag-over');
+    }
+
+    function handleDragLeave(e) {
+      e.preventDefault();
+      photoUploadArea.classList.remove('drag-over');
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      photoUploadArea.classList.remove('drag-over');
+      const file = e.dataTransfer.files[0];
+      if (file) {
+        handleFile(file);
+      }
+    }
+
+    function handleFile(file) {
+      // Validate file
+      if (!file.type.startsWith('image/')) {
+        showNotification('Please select a valid image file!', 'error');
+        return;
+      }
+      
+      if (file.size > 5 * 1024 * 1024) { // 5MB limit
+        showNotification('File size should be less than 5MB!', 'error');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        uploadedPhoto = e.target.result;
+        
+        // Update preview in upload area
+        previewImage.src = uploadedPhoto;
+        uploadPrompt.classList.add('hidden');
+        photoPreview.classList.remove('hidden');
+        
+        // Update card photo
+        cardPhoto.src = uploadedPhoto;
+        cardPhotoContainer.classList.remove('hidden');
+        
+        // Add animation
+        cardPhotoContainer.style.opacity = '0';
+        cardPhotoContainer.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+          cardPhotoContainer.style.transition = 'all 0.5s ease';
+          cardPhotoContainer.style.opacity = '1';
+          cardPhotoContainer.style.transform = 'scale(1)';
+        }, 50);
+        
+        showNotification('Photo uploaded successfully! 📸');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removePhoto() {
+      uploadedPhoto = null;
+      photoUpload.value = '';
+      
+      // Reset upload area
+      uploadPrompt.classList.remove('hidden');
+      photoPreview.classList.add('hidden');
+      
+      // Hide card photo
+      cardPhotoContainer.classList.add('hidden');
+      
+      showNotification('Photo removed successfully!');
+    }
+
+    // Enhanced sticker functionality
+    document.querySelectorAll('.sticker-btn').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const stickerEmoji = button.dataset.sticker;
+        addStickerToCard(stickerEmoji);
+        
+        // Button animation
+        button.style.transform = 'scale(1.5) rotate(360deg)';
+        setTimeout(() => {
+          button.style.transform = 'scale(1) rotate(0deg)';
+        }, 300);
+        
+        showNotification(`Added ${stickerEmoji} sticker!`);
+      });
+    });
+
+    function addStickerToCard(emoji) {
+      const sticker = document.createElement('div');
+      sticker.className = 'absolute text-4xl cursor-pointer select-none transition-transform duration-200 hover:scale-125 sticker-enhanced';
+      sticker.textContent = emoji;
+      sticker.style.left = Math.random() * 70 + 10 + '%';
+      sticker.style.top = Math.random() * 70 + 10 + '%';
+      sticker.style.transform = 'scale(0) rotate(180deg)';
+      sticker.style.zIndex = '20';
+      
+      // Add to container
+      stickersContainer.appendChild(sticker);
+      
+      // Animate in
+      setTimeout(() => {
+        sticker.style.transition = 'all 0.3s ease';
+        sticker.style.transform = 'scale(1) rotate(0deg)';
+      }, 50);
+      
+      // Make draggable
+      makeDraggable(sticker);
+      
+      // Double click to remove
+      sticker.addEventListener('dblclick', () => {
+        sticker.style.transform = 'scale(0) rotate(180deg)';
+        setTimeout(() => sticker.remove(), 300);
+        showNotification('Sticker removed!');
+      });
+      
+      stickers.push(sticker);
+    }
+
+    function makeDraggable(element) {
+      let isDragging = false;
+      let startX, startY, startLeft, startTop;
+      
+      element.addEventListener('mousedown', startDrag);
+      element.addEventListener('touchstart', startDrag, { passive: false });
+      
+      function startDrag(e) {
+        isDragging = true;
+        element.style.zIndex = '30';
+        
+        const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+        const rect = element.getBoundingClientRect();
+        
+        startX = clientX;
+        startY = clientY;
+        startLeft = rect.left;
+        startTop = rect.top;
+        
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('touchmove', drag, { passive: false });
+        document.addEventListener('mouseup', stopDrag);
+        document.addEventListener('touchend', stopDrag);
+        
+        e.preventDefault();
+      }
+      
+      function drag(e) {
+        if (!isDragging) return;
+        
+        e.preventDefault();
+        const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+        
+        const cardRect = greetingCard.getBoundingClientRect();
+        const newLeft = ((startLeft + clientX - startX) - cardRect.left) / cardRect.width * 100;
+        const newTop = ((startTop + clientY - startY) - cardRect.top) / cardRect.height * 100;
+        
+        // Keep within bounds
+        if (newLeft >= 0 && newLeft <= 90 && newTop >= 0 && newTop <= 90) {
+          element.style.left = newLeft + '%';
+          element.style.top = newTop + '%';
+        }
+      }
+      
+      function stopDrag() {
+        isDragging = false;
+        element.style.zIndex = '20';
+        document.removeEventListener('mousemove', drag);
+        document.removeEventListener('touchmove', drag);
+        document.removeEventListener('mouseup', stopDrag);
+        document.removeEventListener('touchend', stopDrag);
+      }
+    }
+
+    // Clear all stickers
+    document.getElementById('clearStickersBtn').addEventListener('click', () => {
+      stickers.forEach(sticker => {
+        sticker.style.transform = 'scale(0) rotate(180deg)';
+        setTimeout(() => sticker.remove(), 300);
+      });
+      stickers = [];
+      showNotification('All stickers cleared!');
+    });
+
+    // Download functionality
+    document.getElementById('downloadBtn').addEventListener('click', async () => {
+      try {
+        // Import html2canvas dynamically
+        const html2canvas = await import('https://cdn.skypack.dev/html2canvas');
+        
+        showNotification('Generating your card... ⏳');
+        
+        const canvas = await html2canvas.default(greetingCard, {
+          backgroundColor: null,
+          scale: 2,
+          logging: false,
+          useCORS: true
+        });
+        
+        const link = document.createElement('a');
+        link.download = `rakhi-wish-${Date.now()}.png`;
+        link.href = canvas.toDataURL();
+        link.click();
+        
+        showNotification('Card downloaded successfully! 🎉');
+      } catch (error) {
+        console.error('Download error:', error);
+        showNotification('Failed to download. Please try again.', 'error');
+      }
+    });
+
+    // Share functionality
+    document.getElementById('shareBtn').addEventListener('click', async () => {
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: 'My Beautiful Rakhi Wish Card',
+            text: 'Check out this beautiful Rakhi card I created!',
+            url: window.location.href
+          });
+          showNotification('Card shared successfully! 📤');
+        } catch (error) {
+          console.error('Share error:', error);
+          fallbackShare();
+        }
+      } else {
+        fallbackShare();
+      }
+    });
+
+    function fallbackShare() {
+      const text = 'Check out this beautiful Rakhi card I created with Rakhi Wish Maker!';
+      const url = window.location.href;
+      
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(`${text} ${url}`);
+        showNotification('Link copied to clipboard! 📋');
+      } else {
+        showNotification('Sharing not supported. Please copy the URL manually.', 'error');
+      }
+    }
+
+    // Social sharing
+    document.querySelectorAll('.social-share').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const platform = button.dataset.platform;
+        const text = encodeURIComponent('Check out this beautiful Rakhi card I created!');
+        const url = encodeURIComponent(window.location.href);
+        
+        let shareUrl = '';
+        
+        switch (platform) {
+          case 'whatsapp':
+            shareUrl = `https://wa.me/?text=${text} ${url}`;
+            break;
+          case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            break;
+          case 'twitter':
+            shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+            break;
+        }
+        
+        if (shareUrl) {
+          window.open(shareUrl, '_blank', 'width=600,height=400');
+          showNotification(`Shared on ${platform}! 📱`);
+        }
+      });
+    });
+
+    // Reset functionality
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      if (confirm('Are you sure you want to reset everything? This cannot be undone.')) {
+        // Reset text
+        wishTextArea.value = "Happy Raksha Bandhan! \nYou are not just my sibling, but my best friend and protector. \nWishing you all the happiness in the world! 💕";
+        updatePreviewText();
+        
+        // Reset font
+        currentFont = 'dancing';
+        document.querySelectorAll('.font-option').forEach(btn => {
+          btn.classList.remove('border-pink-500', 'bg-pink-50', 'scale-105');
+          btn.classList.add('border-pink-200');
+        });
+        document.querySelector('[data-font="dancing"]').classList.add('border-pink-500', 'bg-pink-50', 'scale-105');
+        
+        // Reset background
+        currentBg = 'default';
+        greetingCard.className = greetingCard.className.replace(/bg-\w+/, 'bg-default');
+        document.querySelectorAll('.bg-option').forEach(btn => {
+          btn.classList.remove('border-white', 'scale-110');
+          btn.classList.add('border-transparent');
+        });
+        document.querySelector('[data-bg="default"]').classList.add('border-white', 'scale-110');
+        
+        // Clear stickers
+        stickers.forEach(sticker => sticker.remove());
+        stickers = [];
+        
+        // Remove photo
+        removePhoto();
+        
+        // Reset card animation
+        greetingCard.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+          greetingCard.style.transform = 'scale(1)';
+        }, 300);
+        
+        showNotification('Everything has been reset! 🔄');
+      }
+    });
+
+    // Initialize
+    wishTextArea.addEventListener('input', updatePreviewText);
+    updatePreviewText();
+    
+    // Set default selections
+    document.querySelector('[data-font="dancing"]').classList.add('border-pink-500', 'bg-pink-50', 'scale-105');
+    document.querySelector('[data-bg="default"]').classList.add('border-white', 'scale-110');
+    
+    // Add some initial sparkle effects
+    setTimeout(() => {
+      const sparkleElements = document.querySelectorAll('.sparkle');
+      sparkleElements.forEach((el, index) => {
+        setTimeout(() => {
+          el.style.animation = `sparkle 1.5s ease-in-out infinite`;
+          el.style.animationDelay = `${index * 0.3}s`;
+        }, index * 200);
+      });
+    }, 1000);
+
+    showNotification('Welcome to Rakhi Wish Maker! ✨ Start creating your beautiful card!');
+  </script>
+</body>
+</html>
